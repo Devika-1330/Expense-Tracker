@@ -1,0 +1,18 @@
+# Development Dockerfile for Next.js
+FROM node:20-alpine
+
+RUN corepack enable
+WORKDIR /app
+
+# Install dependencies
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
+
+# Copy source code
+COPY . .
+
+# Expose port for Next.js dev server
+EXPOSE 3000
+
+# Start dev server
+CMD ["pnpm", "dev"]
